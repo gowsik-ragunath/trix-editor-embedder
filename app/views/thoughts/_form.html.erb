@@ -14,7 +14,17 @@
   <div class="actions">
     <p>
       <%= form.label :content %>
-      <%= form.rich_text_area :content %> 
+      <div data-controller="trix-editor">
+        <trix-toolbar id="custom_trix-toolbar" class="custom_toolbar" data-target="trix-editor.toolbar">
+          <%= render "layouts/components/trix_toolbar_buttons" %>
+        </trix-toolbar>
+        <%= form.rich_text_area :content,
+          toolbar: "custom_trix-toolbar",
+          data: {
+            target: "trix-editor.editor"
+          }
+         %>
+      </div>
     </p>
     <%= form.submit %>
   </div>
