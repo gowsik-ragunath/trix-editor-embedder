@@ -19,7 +19,7 @@ export default class extends Controller {
           <div class="trix-button-group">
             <input type="button" class="trix-button trix-button--dialog"
               data-action="click->trix-editor#embedIframe"
-              value="Attach" data-trix-method="removeAttribute">
+              value="Embed" data-trix-method="removeAttribute">
             <input type="button" class="trix-button trix-button--dialog" value="Cancel" data-trix-method="removeAttribute">
           </div>
         </div>
@@ -30,7 +30,6 @@ export default class extends Controller {
       toolbar.insertAdjacentHTML("beforeend", "<div class='trix-dialogs' data-trix-dialogs></div>");
       dialog = toolbar.querySelector(".trix-dialogs");
       dialog.insertAdjacentHTML("beforeend", dialogContent);
-      console.log(dialog);
     }
     else {
       dialog.insertAdjacentHTML("beforeend", dialogContent);
