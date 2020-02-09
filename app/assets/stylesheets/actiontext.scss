@@ -34,3 +34,9 @@
     }
   }
 }
+
+trix-toolbar .trix-button--icon {
+  button[data-trix-attribute=embed] {
+    color: red;
+  }
+}
