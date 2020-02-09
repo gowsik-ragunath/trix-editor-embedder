@@ -35,8 +35,13 @@
   }
 }
 
-trix-toolbar .trix-button--icon {
-  button[data-trix-attribute=embed] {
-    color: red;
+trix-toolbar {
+  .icon-embed {
+    magin-left: 10px !important;
+    font-size: inherit;
+    width: 2.6em;
+    height: 1.6em;
+    max-width: calc(0.8em + 4vw);
+    border: 1px solid #ccc;
   }
 }
