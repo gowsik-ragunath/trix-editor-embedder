@@ -1,5 +1,6 @@
 
 import { Controller } from "stimulus"
+import Trix from "trix"
 
 export default class extends Controller {
   static targets = [ "editor", "toolbar" ]
@@ -41,6 +42,32 @@ export default class extends Controller {
   embedIframe(event) {
     let targetElement = event.target;
     let inputText = targetElement.parentElement.parentElement.childNodes[1];
-    console.log(inputText.value);
+    let url = inputText.value;
+    let request_path = document.getElementById("embed_url").value;
+    if(url != "undefinded" && url != null) {
+      let trix_editor = this.editorTarget;
+
+      let data = { "url": url };
+      fetch(request_path, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        const attachment = new Trix.Attachment({
+          content: data["url"],
+          sgid: data["sgid"],
+        });
+        trix_editor.editor.insertAttachment(attachment);
+        trix_editor.editor.insertLineBreak();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    }
   }
 }

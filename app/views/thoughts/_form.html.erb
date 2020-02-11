@@ -18,6 +18,7 @@
         <trix-toolbar id="custom_trix-toolbar" class="custom_toolbar" data-target="trix-editor.toolbar">
           <%= render "layouts/components/trix_toolbar_buttons" %>
         </trix-toolbar>
+        <%= hidden_field_tag 'embed_url',embeds_path %>
         <%= form.rich_text_area :content,
           toolbar: "custom_trix-toolbar",
           data: {
