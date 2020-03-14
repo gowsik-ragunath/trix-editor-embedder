@@ -1,32 +1,39 @@
-<%= form_with(model: thought, local: true) do |form| %>
-  <% if thought.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(thought.errors.count, "error") %> prohibited this thought from being saved:</h2>
 
-      <ul>
-        <% thought.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <%= form_with(model: thought, local: true) do |form| %>
+    <% if thought.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(thought.errors.count, "error") %> prohibited this thought from being saved:</h2>
+
+        <ul>
+          <% thought.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <p>
+        <%= form.label :content, class: "text-2xl py-2" %>
+        
+          <div data-controller="trix-editor">
+            <trix-toolbar id="custom_trix-toolbar" class="custom_toolbar" data-target="trix-editor.toolbar">
+              <%= render "layouts/components/trix_toolbar_buttons" %>
+            </trix-toolbar>
+            <%= hidden_field_tag 'embed_url',embeds_path %>
+            <div class="box-border mt-5 mb-2 h-auto w-auto p-2 border-4 border-black rounded">
+              <div class="h-full w-full bg-gray-900">
+                <%= form.rich_text_area :content,
+                toolbar: "custom_trix-toolbar",
+                data: {
+                  target: "trix-editor.editor"
+                },
+                class: "p-5"
+               %>
+             </div>
+            </div>
+          </div>
+      </p>
+      <%= form.submit class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded' %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <p>
-      <%= form.label :content %>
-      <div data-controller="trix-editor">
-        <trix-toolbar id="custom_trix-toolbar" class="custom_toolbar" data-target="trix-editor.toolbar">
-          <%= render "layouts/components/trix_toolbar_buttons" %>
-        </trix-toolbar>
-        <%= hidden_field_tag 'embed_url',embeds_path %>
-        <%= form.rich_text_area :content,
-          toolbar: "custom_trix-toolbar",
-          data: {
-            target: "trix-editor.editor"
-          }
-         %>
-      </div>
-    </p>
-    <%= form.submit %>
-  </div>
-<% end %>

@@ -1,0 +1,18 @@
+
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+
+@import "actiontext";
+@import "default_style";
+
+
+body {
+	margin: 0px;
+	padding: 0px;
+	background-color: #323232;
+	color: #FFFFFF;
+}
