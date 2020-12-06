@@ -8,6 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      RAILS_ENV: test
+      PGHOST: localhost
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
