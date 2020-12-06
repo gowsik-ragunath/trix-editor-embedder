@@ -1,0 +1,48 @@
+name: CI/CD
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+          options: >-
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
+
+    # Redis service here - if needed in future
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.45.0
+        with:
+          ruby-version: 2.7.0
+      
+      - uses: Borales/actions-yarn@v2.3.0
+      - name: Setup Yarn
+        with:
+          cmd: install
+      
+      - name: Install Dependencies
+        run: |
+          sudo apt install -yqq libpq-dev
+          gem install bundler
+      
+      - name: Install Gems
+        run: bundle install
+
+      - name: Prepare Database
+        run: bundle exec rails db:prepare
+
+      
