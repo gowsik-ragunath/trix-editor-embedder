@@ -20,6 +20,8 @@ development:
 test:
   <<: *default
   database: trix_editor_embedder_test
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 production:
   <<: *default

@@ -7,14 +7,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
 
     services:
       postgres:
         image: postgres:11
         ports: ["5432:5432"]
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -36,8 +36,8 @@ jobs:
           sudo apt install -yqq libpq-dev
           gem install bundler
       - name: Install Gems
-        run: bundle install
+        run: bundle install --jobs 4 --retry 3
       - name: Prepare Database
-        run: bundle exec rails db:prepare
-
-      
+        run: |
+          bundle exec rake db:create
+          bundle exec rake db:migrate
