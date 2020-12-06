@@ -7,6 +7,8 @@ ruby "2.7.0"
 gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
+# Use postgres for database
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -34,10 +36,6 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.4'
-end
-
-group :production do
-  gem 'pg'
 end
 
 group :development do
