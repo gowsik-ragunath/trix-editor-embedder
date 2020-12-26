@@ -1,0 +1,10 @@
+<div id="room" data-room-id="<%= @room.id %>">
+	<% @direct_messages.each do |direct_message| %>
+		<%= direct_message&.user&.email %> : <div class="inline-block"><%= direct_message.message %></div>
+		<br />
+	<% end %>
+
+	<div id="new_message"></div>
+
+	<%= render "direct_messages/form", direct_message: @direct_message, room_id: @room.id %>
+</div>

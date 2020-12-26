@@ -1,0 +1,10 @@
+<%= form_with(model: direct_message, remote: true) do |form| %>
+	<% if direct_message.errors.any? %>
+		<%= direct_message.errors.messages %>
+	<% end %>
+	<%= hidden_field_tag :room_id, room_id %>
+	<%= form.label :message %>
+	<%= form.text_field :message %>
+
+	<%= form.submit "send" %>
+<% end %>

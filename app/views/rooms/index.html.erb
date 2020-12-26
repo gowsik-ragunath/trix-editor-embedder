@@ -1,0 +1,5 @@
+<% @rooms.each_with_index do |room, index| %>
+	<%= link_to "Room_#{index}", room_path(room.id) %>
+<% end %>
+
+<%= link_to "Start Room", rooms_path, method: :post %>
