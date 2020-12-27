@@ -1,0 +1,11 @@
+<%= form_with(model: video) do |form| %>
+
+	<%= form.label :title, "Title" %>
+	<%= form.text_field :title %>
+
+	<%= form.label :clip, "Clip" %>
+	<%= form.file_field :clip %>
+
+
+	<%= form.submit %>
+<% end %>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resources :rooms, only: [:index, :create, :show]
   resources :direct_messages, only: [:index, :new, :create]
+  resources :videos, only: [:index, :new, :create, :show]
   post "embeds", to: "embeds#create"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,5 @@
+<%= @video.title %>
+
+<video src="<%= url_for(@video.clip) %>" poster="<%= url_for(@video.sized(:thumbnail)) %>" controls>
+	
+</video>

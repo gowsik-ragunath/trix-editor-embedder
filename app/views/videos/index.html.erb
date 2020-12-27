@@ -1,0 +1,5 @@
+<% @videos.find_each do |video| %>
+	<div>
+		<%= link_to video.title, video_path(video.id) %>
+	</div>
+<% end %>
