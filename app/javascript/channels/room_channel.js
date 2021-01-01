@@ -2,7 +2,6 @@ import consumer from "./consumer"
 
 document.addEventListener("turbolinks:load", function() {
 	var room = document.querySelector("#room")
-	console.log(room)
 	if(room)
 	{
 		consumer.subscriptions.create({ channel: "RoomChannel", room: room.getAttribute("data-room-id") }, {
@@ -17,10 +16,14 @@ document.addEventListener("turbolinks:load", function() {
 
 		  received(data) {
 		    // Called when there's incoming data on the websocket for this channel
-		    console.log(data)
+		   	if(data) {
+			    let bodyContent = data["message"];
+			    let formAction = document.querySelector("#form-action");
+			    let newMessage = `${data["user_email"]}: <div class=inline-block">${data["message"]}</div> <br />`;
+
+			    formAction.insertAdjacentHTML("beforebegin", newMessage);
+			}
 		  }
 		});
 	}
 })
-
-//		consumer.subscriptions.create({ channel: `room_channel_${room.getAttribute("data-room-id")}` }, {

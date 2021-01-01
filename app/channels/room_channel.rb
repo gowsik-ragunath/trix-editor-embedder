@@ -10,8 +10,6 @@ class RoomChannel < ApplicationCable::Channel
 
 	private
 		def channel_name
-			p room
-			p "!!!"
 			"room_channel_#{room.id}"
 		end
 

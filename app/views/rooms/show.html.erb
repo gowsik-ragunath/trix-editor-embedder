@@ -4,7 +4,7 @@
 		<br />
 	<% end %>
 
-	<div id="new_message"></div>
-
-	<%= render "direct_messages/form", direct_message: @direct_message, room_id: @room.id %>
+	<div id="form-action">
+		<%= render "direct_messages/form", direct_message: @direct_message, room_id: @room.id %>
+	</div>
 </div>

@@ -17,7 +17,9 @@ class DirectMessagesController < ApplicationController
 			@direct_message.user = current_user
 
 			if @direct_message.save
-        		ActionCable.server.broadcast("room_channel_#{@room.id}", content: @direct_message)
+        		ActionCable.server.broadcast("room_channel_#{@room.id}", 
+        									 message: @direct_message.message.body.to_plain_text,
+        									 user_email: current_user.email)
                 format.json { render :show, status: :created, location: @direct_message }
                 format.js
 			else
@@ -30,7 +32,7 @@ class DirectMessagesController < ApplicationController
 
 
 		def set_room
-			@room = current_user.rooms.find_by(id: params[:room_id])
+			@room = Room.find_by(id: params[:room_id])
 		end
 
         # Never trust parameters from the scary internet, only allow the white list through.
