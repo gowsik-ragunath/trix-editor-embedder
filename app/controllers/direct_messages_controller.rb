@@ -17,7 +17,7 @@ class DirectMessagesController < ApplicationController
 			@direct_message.user = current_user
 
 			if @direct_message.save
-        		RoomChannel.broadcast_to @room, content: @direct_message 
+        		ActionCable.server.broadcast("room_channel_#{@room.id}", content: @direct_message)
                 format.json { render :show, status: :created, location: @direct_message }
                 format.js
 			else
