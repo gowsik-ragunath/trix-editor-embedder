@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   root to: "thoughts#index"
   mount ActionCable.server => "/cable"
 
-  resources :thoughts
+  resources :thoughts do
+    collection do
+      get :dynamic_extension_content
+      get :extension_create
+    end
+  end
 
   resources :rooms, only: [:index, :create, :show]
   resources :direct_messages, only: [:index, :new, :create]

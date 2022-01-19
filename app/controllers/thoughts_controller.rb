@@ -1,4 +1,7 @@
 class ThoughtsController < ApplicationController
+    protect_from_forgery with: :null_session
+    
+    skip_before_action :authenticate_user!, only: [:dynamic_extension_content, :extension_create]
     before_action :set_thought, only: [:show, :edit, :update, :destroy]
 
     # GET /thoughts
@@ -37,6 +40,17 @@ class ThoughtsController < ApplicationController
         end
     end
 
+    def extension_create
+        @thought = current_user.thoughts.new(content: params[:links])
+
+        p params[:links]
+        p "^^^"
+
+        if @thought.save
+            render json: @thought.to_json
+        end
+    end
+
     # PATCH/PUT /thoughts/1
     # PATCH/PUT /thoughts/1.json
     def update
@@ -59,6 +73,10 @@ class ThoughtsController < ApplicationController
             format.html { redirect_to thoughts_url, notice: 'Thought was successfully destroyed.' }
             format.json { head :no_content }
         end
+    end
+
+    def dynamic_extension_content
+        render json: { signed_in: current_user.present? }
     end
 
     private
